@@ -1,0 +1,522 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { siteConfig, skills, skillCategories, experience, type Experience } from "@/lib/data";
+import { Briefcase, GraduationCap, MapPin, User, Download, Code2, Award } from "lucide-react";
+
+/* ── Duration Calculator ──────────────────────────────────── */
+function getDuration(period: string, current: boolean): string {
+  const parts = period.split(" — ");
+  const startYear = parseInt(parts[0]);
+  if (isNaN(startYear)) return "";
+  const now = new Date();
+  const endDate = current ? now : new Date(parseInt(parts[1]), 11);
+  const startDate = new Date(startYear, 0);
+  const totalMonths =
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+    endDate.getMonth() -
+    startDate.getMonth();
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  if (months === 0) return `${years} yr`;
+  if (years === 0) return `${months} mo`;
+  return `${years} yr ${months} mo`;
+}
+
+/* ── Skill Bar ────────────────────────────────────────────── */
+function SkillBar({
+  name,
+  level,
+  color,
+  index,
+}: {
+  name: string;
+  level: number;
+  color: string;
+  index: number;
+}) {
+  const ref    = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  return (
+    <div ref={ref} style={{ marginBottom: "0.75rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.35rem" }}>
+        <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--text-primary)" }}>
+          {name}
+        </span>
+        <span
+          style={{
+            fontSize: "0.78rem",
+            color: "var(--text-muted)",
+            fontFamily: "JetBrains Mono, monospace",
+          }}
+        >
+          {level}%
+        </span>
+      </div>
+      <div className="skill-bar">
+        <motion.div
+          className="skill-bar-fill"
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: level / 100 } : {}}
+          transition={{ delay: index * 0.05, duration: 0.8 }}
+          style={{ background: `linear-gradient(90deg, ${color}, ${color}99)` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ── Experience Glass Card ────────────────────────────────── */
+function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
+  const ref    = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const duration = getDuration(exp.period, exp.current);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.15, duration: 0.6 }}
+      className={`experience-card${exp.current ? " active" : ""}`}
+      style={{ marginBottom: "1.25rem" }}
+    >
+      {/* Active glow strip */}
+      {exp.current && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0, left: 0, right: 0,
+            height: "2px",
+            borderRadius: "20px 20px 0 0",
+            background: "var(--gradient-accent)",
+          }}
+        />
+      )}
+
+      {/* Header row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "0.75rem",
+          marginBottom: "0.75rem",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+          {/* Company initial circle */}
+          <div
+            style={{
+              width: "44px", height: "44px",
+              borderRadius: "12px",
+              background: exp.current
+                ? "var(--gradient-accent)"
+                : "var(--bg-tertiary)",
+              border: `1px solid ${exp.current ? "transparent" : "var(--border-default)"}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "1rem", fontWeight: 700,
+              color: exp.current ? "white" : "var(--text-secondary)",
+              flexShrink: 0,
+              boxShadow: exp.current ? "var(--shadow-accent)" : "none",
+            }}
+          >
+            {exp.company[0]}
+          </div>
+
+          <div>
+            <h3
+              style={{
+                fontSize: "1rem", fontWeight: 700,
+                color: "var(--text-primary)", marginBottom: "0.15rem",
+              }}
+            >
+              {exp.role}
+            </h3>
+            <p style={{ fontSize: "0.875rem", color: "var(--accent-primary)", fontWeight: 600 }}>
+              {exp.company}
+            </p>
+          </div>
+        </div>
+
+        <div style={{ textAlign: "right", flexShrink: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", justifyContent: "flex-end" }}>
+            <span
+              style={{
+                fontSize: "0.72rem", fontWeight: 600,
+                padding: "0.2rem 0.65rem", borderRadius: "999px",
+                background: exp.current ? "rgba(16,185,129,0.1)" : "var(--bg-tertiary)",
+                color: exp.current ? "#10b981" : "var(--text-muted)",
+                border: `1px solid ${exp.current ? "rgba(16,185,129,0.25)" : "var(--border-default)"}`,
+              }}
+            >
+              {exp.current ? "Current" : "Completed"}
+            </span>
+            {duration && (
+              <span
+                style={{
+                  fontSize: "0.72rem", fontWeight: 500,
+                  padding: "0.2rem 0.65rem", borderRadius: "999px",
+                  background: "var(--bg-tertiary)",
+                  color: "var(--text-muted)",
+                  border: "1px solid var(--border-default)",
+                  fontFamily: "JetBrains Mono, monospace",
+                }}
+              >
+                {duration}
+              </span>
+            )}
+          </div>
+          <p
+            style={{
+              fontSize: "0.78rem", color: "var(--text-muted)",
+              marginTop: "0.4rem",
+              display: "flex", alignItems: "center", gap: "0.25rem", justifyContent: "flex-end",
+            }}
+          >
+            <MapPin size={11} /> {exp.period}
+          </p>
+        </div>
+      </div>
+
+      <p
+        style={{
+          fontSize: "0.875rem", color: "var(--text-secondary)",
+          lineHeight: 1.65, marginBottom: "1rem",
+        }}
+      >
+        {exp.description}
+      </p>
+
+      <ul
+        style={{
+          listStyle: "none", padding: 0, margin: "0 0 1rem",
+          display: "flex", flexDirection: "column", gap: "0.4rem",
+        }}
+      >
+        {exp.achievements.map((a) => (
+          <li
+            key={a}
+            style={{
+              fontSize: "0.83rem", color: "var(--text-secondary)",
+              display: "flex", alignItems: "flex-start", gap: "0.5rem",
+            }}
+          >
+            <div
+              style={{
+                width: "5px", height: "5px", borderRadius: "50%",
+                background: "var(--accent-primary)",
+                marginTop: "0.45rem", flexShrink: 0,
+              }}
+            />
+            {a}
+          </li>
+        ))}
+      </ul>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+        {exp.tags.map((tag) => (
+          <span key={tag} className="tech-badge" style={{ fontSize: "0.72rem" }}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Page ─────────────────────────────────────────────────── */
+export default function AboutPage() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const inView    = useInView(headerRef, { once: true });
+
+  return (
+    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingBottom: "5rem" }}>
+      {/* Hero */}
+      <div
+        style={{
+          background: "var(--bg-secondary)",
+          borderBottom: "1px solid var(--border-default)",
+          padding: "5rem 0 4rem",
+        }}
+      >
+        <div className="container" ref={headerRef}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row items-center md:items-center gap-8 md:gap-12 lg:gap-16"
+          >
+            {/* Avatar */}
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={inView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="relative shrink-0"
+            >
+              <div
+                style={{
+                  position: "absolute", inset: "-10px", borderRadius: "32px",
+                  background: "rgba(59, 130, 246, 0.15)", filter: "blur(20px)", zIndex: 0,
+                }}
+              />
+              <div
+                className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] lg:w-[260px] lg:h-[260px] rounded-[28px] overflow-hidden z-10"
+                style={{ boxShadow: "0 0 0 1px rgba(255,255,255,0.05)", background: "var(--bg-card)" }}
+              >
+                <Image
+                  src={siteConfig.avatarUrl}
+                  alt={siteConfig.name}
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                  sizes="(max-width: 768px) 200px, 260px"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Content */}
+            <div className="flex-1 text-center md:text-left">
+              <p
+                className="flex items-center justify-center md:justify-start gap-2 text-[0.8rem] font-bold tracking-[0.15em] uppercase mb-4"
+                style={{ color: "#3b82f6" }}
+              >
+                <User size={15} /> About Me
+              </p>
+
+              <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight leading-tight" style={{ color: "var(--text-primary)" }}>
+                Muhammad Abdullah{" "}
+                <span style={{ color: "#818cf8" }}>Sarwar</span>
+              </h1>
+
+              <p className="font-semibold text-lg md:text-xl mb-4" style={{ color: "#3b82f6" }}>
+                {siteConfig.role}
+              </p>
+
+              <p
+                className="flex items-center justify-center md:justify-start gap-2 text-sm font-medium mb-6"
+                style={{ color: "var(--text-muted)" }}
+              >
+                <MapPin size={15} /> {siteConfig.location}
+              </p>
+
+              <p
+                className="text-[1.05rem] leading-[1.7] mb-8 max-w-[640px]"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                I&apos;m a Full Stack Engineer and AI Integration Specialist with a passion for
+                building products that matter. Currently leading software development at{" "}
+                <a
+                  href="https://medquadhealth.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "var(--text-primary)", fontWeight: 700,
+                    textDecoration: "underline",
+                    textDecorationColor: "rgba(59, 130, 246, 0.5)",
+                    textUnderlineOffset: "4px",
+                  }}
+                >
+                  Medquad Health Solutions
+                </a>
+                , where I ship production-grade web applications and explore the frontier of AI in
+                health-tech.
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                <a
+                  href={siteConfig.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-accent"
+                >
+                  <Download size={17} /> Download Resume
+                </a>
+                <a
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost"
+                >
+                  <Code2 size={17} /> GitHub
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="container" style={{ paddingTop: "4rem" }}>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem" }}
+          className="about-main-grid"
+        >
+          {/* Left: Experience + Education */}
+          <div>
+            {/* Experience */}
+            <div style={{ marginBottom: "3.5rem" }}>
+              <div
+                style={{
+                  display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: "38px", height: "38px", borderRadius: "10px",
+                    background: "var(--gradient-accent)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "var(--shadow-accent)",
+                  }}
+                >
+                  <Briefcase size={18} color="white" />
+                </div>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                  Experience
+                </h2>
+              </div>
+
+              {/* Animated vertical connector line */}
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "21px",
+                    top: "52px",
+                    bottom: "0",
+                    width: "2px",
+                    background:
+                      "linear-gradient(180deg, var(--accent-primary) 0%, var(--border-default) 100%)",
+                    zIndex: 0,
+                  }}
+                />
+                <div style={{ position: "relative", zIndex: 1 }}>
+                  {experience.map((exp, i) => (
+                    <ExperienceCard key={exp.id} exp={exp} index={i} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Education */}
+            <div>
+              <div
+                style={{
+                  display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: "38px", height: "38px", borderRadius: "10px",
+                    background: "linear-gradient(135deg, #7c3aed, #8b5cf6)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}
+                >
+                  <GraduationCap size={18} color="white" />
+                </div>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                  Education
+                </h2>
+              </div>
+              <div className="experience-card">
+                <p
+                  style={{
+                    fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase",
+                    letterSpacing: "0.08em", color: "#7c3aed", marginBottom: "0.4rem",
+                  }}
+                >
+                  2021 — 2025
+                </p>
+                <h3
+                  style={{
+                    fontSize: "1rem", fontWeight: 700,
+                    color: "var(--text-primary)", marginBottom: "0.25rem",
+                  }}
+                >
+                  Bachelor of Science in Software Engineering
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.875rem", color: "var(--accent-primary)",
+                    fontWeight: 600, marginBottom: "0.75rem",
+                  }}
+                >
+                  Bahria University, Islamabad
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Award size={14} style={{ color: "#f59e0b" }} />
+                  <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+                    FYP ranked 2nd out of 50 projects
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Skills */}
+          <div>
+            <div
+              style={{
+                display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem",
+              }}
+            >
+              <div
+                style={{
+                  width: "38px", height: "38px", borderRadius: "10px",
+                  background: "linear-gradient(135deg, #0891b2, #06b6d4)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <Code2 size={18} color="white" />
+              </div>
+              <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                Skills &amp; Proficiency
+              </h2>
+            </div>
+
+            {skillCategories.map((cat) => {
+              const catSkills = skills.filter((s) => s.category === cat.key);
+              if (catSkills.length === 0) return null;
+              return (
+                <div key={cat.key} style={{ marginBottom: "2rem" }}>
+                  <h3
+                    style={{
+                      fontSize: "0.78rem", fontWeight: 600,
+                      textTransform: "uppercase", letterSpacing: "0.1em",
+                      color: cat.color, marginBottom: "1rem",
+                      display: "flex", alignItems: "center", gap: "0.5rem",
+                    }}
+                  >
+                    <div
+                      style={{ width: "8px", height: "8px", borderRadius: "2px", background: cat.color }}
+                    />
+                    {cat.label}
+                  </h3>
+                  {catSkills.map((skill, i) => (
+                    <SkillBar
+                      key={skill.name}
+                      name={skill.name}
+                      level={skill.level}
+                      color={cat.color}
+                      index={i}
+                    />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .about-main-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
