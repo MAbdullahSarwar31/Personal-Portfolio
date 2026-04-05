@@ -727,9 +727,69 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   border-radius: 4px;
 }
 
+
 /* ── Consistent card hover lift ────────────────────────────── */
 .experience-card:hover,
 .process-card:hover,
 .testimonial-card:hover {
   transform: translateY(-3px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS — Comprehensive Fix
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Stats: 2×2 grid on small screens ── */
+@media (max-width: 639px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  .stats-grid > div {
+    padding: 1.5rem 0.75rem !important;
+  }
+}
+
+/* ── Filter row: hide scrollbar cleanly ── */
+.filter-row {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.filter-row::-webkit-scrollbar { display: none; }
+
+/* ── Filter row buttons: tappable height on mobile ── */
+@media (max-width: 768px) {
+  .filter-row button {
+    padding: 0.55rem 0.9rem !important;
+    font-size: 0.82rem !important;
+    min-height: 40px;
+  }
+}
+
+/* ── Testimonial grid: single column on mobile ── */
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── AI Chat Widget: stay above nav, safe on mobile ── */
+@media (max-width: 768px) {
+  /* Chat button: keep bottom-right, give breathing room from edge */
+  [id="chat-widget-btn"] {
+    bottom: 1.25rem !important;
+    right:  1.25rem !important;
+  }
+}
+
+/* ── Section padding tighter on very small phones ── */
+@media (max-width: 400px) {
+  .section { padding: 2.25rem 0; }
+  .container { padding: 0 0.875rem; }
+  .section-title { font-size: 1.7rem; }
+}
+
+/* ── Nav brand name clamp on smallest phones ── */
+@media (max-width: 360px) {
+  .nav-brand-name { font-size: 0.8rem !important; }
 }

@@ -80,10 +80,11 @@ export function StatsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
+          className="stats-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: "2rem",
+            gap: "1.5rem",
             textAlign: "center",
           }}
         >

@@ -301,12 +301,15 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.6 }}
               style={{
-                fontSize: "clamp(1.1rem, 2vw, 1.35rem)",
+                fontSize: "clamp(0.95rem, 2vw, 1.25rem)",
                 color: "var(--text-secondary)",
                 fontWeight: 600,
                 marginBottom: "1rem",
                 letterSpacing: "-0.01em",
                 minHeight: "1.8em",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
+                maxWidth: "100%",
               }}
             >
               <TypeWriter />
@@ -330,11 +333,13 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
               style={{
-                fontSize: "clamp(0.95rem, 1.5vw, 1.1rem)",
+                fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
                 color: "var(--text-secondary)",
                 maxWidth: "580px",
                 lineHeight: 1.75,
                 marginBottom: "2.5rem",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
               }}
             >
               Sole developer at{" "}
