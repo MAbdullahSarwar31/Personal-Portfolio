@@ -39,7 +39,11 @@ export async function POST(req: NextRequest) {
   try {
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "MAbdullahSarwar-Portfolio/1.0"
+      },
       body: JSON.stringify({
         access_key: accessKey.trim(),
         name:        name.trim(),
