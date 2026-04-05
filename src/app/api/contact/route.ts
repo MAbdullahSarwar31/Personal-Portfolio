@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        access_key: accessKey,
+        access_key: accessKey.trim(),
         name:        name.trim(),
         email:       email.trim(),
         subject:     `Portfolio Contact: ${subject.trim()}`,
@@ -51,7 +51,17 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    const data: { success: boolean; message?: string } = await response.json();
+    const responseText = await response.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error("Web3Forms non-JSON response:", responseText);
+      return NextResponse.json(
+        { error: "Web3Forms API Error: " + responseText.substring(0, 50) },
+        { status: 500 }
+      );
+    }
 
     if (data.success) {
       return NextResponse.json({ success: true });
@@ -61,9 +71,10 @@ export async function POST(req: NextRequest) {
       { error: data.message ?? "Failed to send. Please try again." },
       { status: 500 }
     );
-  } catch {
+  } catch (err: any) {
+    console.error("Web3Forms fetch error:", err);
     return NextResponse.json(
-      { error: "Server error. Please email me directly." },
+      { error: err.message || "Server error. Please email me directly." },
       { status: 500 }
     );
   }
