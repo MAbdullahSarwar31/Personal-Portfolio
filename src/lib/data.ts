@@ -9,7 +9,7 @@ export const siteConfig = {
   github:         "https://github.com/MAbdullahSarwar31",
   linkedin:       "https://www.linkedin.com/in/muhammad-abdullah-sarwar-b727682a8/",
   website:        "https://m-abdullah-sarwar.vercel.app/",
-  resumeUrl:      "/resume.pdf",
+  resumeUrl:      "/Muhammad_Abdullah_Sarwar_Resume.pdf",
   avatarUrl:      "/profile.jpg",
   availableForWork: true,
 };
@@ -77,20 +77,21 @@ export const projects: Project[] = [
   {
     id: "fyp-management",
     title: "FYP Management System",
-    subtitle: "Flutter Mobile App — Ranked 2nd / 50 Projects",
+    subtitle: "Flutter Mobile App — Ranked 2nd / 50 Projects · Business Process Automation Course",
     description:
-      "Cross-platform Flutter mobile app automating the complete Final Year Project lifecycle for 100+ students and 12 faculty at Bahria University.",
+      "Cross-platform Flutter mobile app built for the Business Process Automation course, digitizing the complete FYP management lifecycle for 100+ students and 12 faculty at Bahria University.",
     longDescription:
-      "Sole developer of a Flutter cross-platform mobile app that fully digitized the manual FYP management process at Bahria University Islamabad. The app covers project submissions, supervisor assignments, milestone tracking, evaluation scheduling, and grading — eliminating an entirely paper-based workflow. Ranked 2nd out of 50 competing projects at the university showcase, evaluated by a panel of industry professionals and academic faculty.",
+      "Sole developer of a Flutter cross-platform mobile app built as part of the Business Process Automation course at Bahria University Islamabad. The app fully digitized the manual FYP management workflow — covering project submissions, supervisor assignments, milestone tracking, evaluation scheduling, and grading — eliminating an entirely paper-based process. Ranked 2nd out of 50 competing projects at the course showcase, evaluated by a panel of industry professionals and academic faculty.",
     image: "/projects/fyp-app.png",
     tags: ["Flutter", "Dart", "Firebase", "Firebase Realtime DB", "Firebase Auth"],
     category: "mobile",
     projectTag: "Academic · Mobile App",
     metrics: [
+      "Business Process Automation course project — not a degree FYP",
       "100+ students and 12 faculty members served",
       "Automated supervisor assignment, milestone tracking & grading workflows",
       "Firebase Realtime Database for live notifications and status updates",
-      "Ranked 2nd out of 50 projects at Bahria University showcase",
+      "Ranked 2nd out of 50 projects at the course showcase",
     ],
     featured: true,
     status: "completed",

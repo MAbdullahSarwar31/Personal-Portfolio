@@ -370,8 +370,7 @@ export function HeroSection() {
               </button>
               <a
                 href={siteConfig.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                download="Muhammad_Abdullah_Sarwar_Resume.pdf"
                 className="btn-ghost"
                 style={{ padding: "0.6rem 1rem", minHeight: "44px", display: "inline-flex", alignItems: "center" }}
                 aria-label="Download Resume"

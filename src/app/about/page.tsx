@@ -308,8 +308,7 @@ export default function AboutPage() {
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
                 <a
                   href={siteConfig.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download="Muhammad_Abdullah_Sarwar_Resume.pdf"
                   className="btn-accent"
                 >
                   <Download size={17} /> Download Resume
@@ -431,7 +430,7 @@ export default function AboutPage() {
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                   <Award size={14} style={{ color: "#f59e0b" }} />
                   <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
-                    FYP ranked 2nd out of 50 projects
+                    BPA course project ranked 2nd out of 50
                   </span>
                 </div>
               </div>

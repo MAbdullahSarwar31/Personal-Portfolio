@@ -186,7 +186,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Muhammad Abdullah Sarwar. All rights reserved.
           </p>
           <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-            Built with Next.js &amp; Framer Motion
+            Designed & built by Abdullah Sarwar
           </p>
         </div>
       </div>
