@@ -7,21 +7,38 @@ import { siteConfig, skills, skillCategories, experience, type Experience } from
 import { Briefcase, GraduationCap, MapPin, User, Download, Code2, Award } from "lucide-react";
 
 /* ── Duration Calculator ──────────────────────────────────── */
+const MONTH_MAP: Record<string, number> = {
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
+function parsePeriodDate(s: string): Date {
+  const str = s.trim();
+  if (str === "Present") return new Date();
+  // "Mar 2025" format
+  const monthYear = str.match(/^([A-Z][a-z]{2})\s+(\d{4})$/);
+  if (monthYear) {
+    const m = MONTH_MAP[monthYear[1]] ?? 0;
+    return new Date(parseInt(monthYear[2]), m);
+  }
+  // Plain year "2024"
+  return new Date(parseInt(str), 0);
+}
+
 function getDuration(period: string, current: boolean): string {
   const parts = period.split(" — ");
-  const startYear = parseInt(parts[0]);
-  if (isNaN(startYear)) return "";
-  const now = new Date();
-  const endDate = current ? now : new Date(parseInt(parts[1]), 11);
-  const startDate = new Date(startYear, 0);
+  if (parts.length < 2) return "";
+  const start = parsePeriodDate(parts[0]);
+  const end   = current ? new Date() : parsePeriodDate(parts[1]);
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
   const totalMonths =
-    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-    endDate.getMonth() -
-    startDate.getMonth();
-  const years = Math.floor(totalMonths / 12);
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    end.getMonth() - start.getMonth();
+  if (totalMonths <= 0) return "";
+  const years  = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
   if (months === 0) return `${years} yr`;
-  if (years === 0) return `${months} mo`;
+  if (years  === 0) return `${months} mo`;
   return `${years} yr ${months} mo`;
 }
 
@@ -308,8 +325,8 @@ export default function AboutPage() {
                 className="text-[1.05rem] leading-[1.7] mb-8 max-w-[640px]"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I&apos;m a Full Stack Engineer and AI Integration Specialist with a passion for
-                building products that matter. Currently leading software development at{" "}
+                I&apos;m a Full Stack Developer and AI Integration Engineer with 2+ years of
+                hands-on experience shipping production software. I&apos;m the sole developer at{" "}
                 <a
                   href="https://medquadhealth.com"
                   target="_blank"
@@ -322,9 +339,13 @@ export default function AboutPage() {
                   }}
                 >
                   Medquad Health Solutions
-                </a>
-                , where I ship production-grade web applications and explore the frontier of AI in
-                health-tech.
+                </a>{" "}
+                — a biomedical health-tech company — where I&apos;ve built the operations portal
+                that hospitals across Pakistan run on daily. The work spans real-time WebSocket
+                systems, NLP-based ticket routing, cloud infrastructure on AWS, and AI integration
+                via OpenAI. Beyond Medquad, I&apos;ve completed AI &amp; ML internships at
+                CodeAlpha and DevelopersHub, and I recently graduated with a BS in Software
+                Engineering from Bahria University, where my Final Year Project ranked 2nd out of 50.
               </p>
 
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
@@ -514,7 +535,7 @@ export default function AboutPage() {
 
       <style jsx>{`
         @media (max-width: 768px) {
-          .about-main-grid { grid-template-columns: 1fr !important; }
+          .about-main-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
         }
       `}</style>
     </div>

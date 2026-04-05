@@ -9,9 +9,9 @@ import { CTASection }         from "@/components/home/CTASection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Muhammad Abdullah Sarwar — Full Stack Engineer & AI Specialist",
+  title: "Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer",
   description:
-    "Portfolio of Muhammad Abdullah Sarwar — Lead Full Stack Developer at Medquad Health Solutions. Expert in React, Next.js, Node.js, and AI integration.",
+    "Sole developer at Medquad Health Solutions — building production health-tech for hospitals across Pakistan. MERN stack, Flutter, AWS, OpenAI. Based in Islamabad.",
 };
 
 export default function HomePage() {

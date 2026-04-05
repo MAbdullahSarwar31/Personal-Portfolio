@@ -3,7 +3,7 @@
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, GitBranch, Zap, Clock, X, BarChart2 } from "lucide-react";
+import { ArrowRight, ExternalLink, GitBranch, Zap, X, BarChart2, Tag, Lock } from "lucide-react";
 import { featuredProjects, type Project } from "@/lib/data";
 
 const statusConfig = {
@@ -95,13 +95,12 @@ function CaseStudyModal({
         <div style={{ padding: "1.75rem 2rem 2rem" }}>
           <span
             style={{
-              fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase",
+              fontSize: "0.68rem", fontWeight: 600, textTransform: "uppercase",
               letterSpacing: "0.08em", color: "var(--accent-primary)",
-              display: "block", marginBottom: "0.4rem",
+              display: "flex", alignItems: "center", gap: "0.35rem", marginBottom: "0.4rem",
             }}
           >
-            {project.category === "ai" ? "AI Project" :
-             project.category === "mobile" ? "Mobile App" : "Full Stack"}
+            <Tag size={10} /> {project.projectTag}
           </span>
           <h2
             style={{
@@ -212,8 +211,8 @@ function CaseStudyModal({
                   display: "flex", alignItems: "center", gap: "0.4rem",
                 }}
               >
-                <Clock size={13} />
-                {project.status === "in-progress" ? "In active development" : "Private repository"}
+                <Lock size={13} />
+                {project.status === "in-progress" ? "In active development" : "Code available on request"}
               </span>
             )}
           </div>
@@ -320,13 +319,12 @@ function ProjectCard({
         <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
           <span
             style={{
-              fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase",
+              fontSize: "0.68rem", fontWeight: 600, textTransform: "uppercase",
               letterSpacing: "0.08em", color: "var(--accent-primary)", marginBottom: "0.35rem",
-              display: "block",
+              display: "flex", alignItems: "center", gap: "0.3rem",
             }}
           >
-            {project.category === "ai" ? "AI Project" :
-             project.category === "mobile" ? "Mobile App" : "Full Stack"}
+            <Tag size={9} /> {project.projectTag}
           </span>
 
           <h3
@@ -408,7 +406,7 @@ function ProjectCard({
                   display: "flex", alignItems: "center", gap: "0.3rem",
                 }}
               >
-                <Clock size={13} />
+                <Lock size={13} />
                 {project.status === "in-progress" ? "Coming soon" : "Private"}
               </span>
             )}
@@ -451,7 +449,7 @@ export function FeaturedProjects() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
             gap: "1.75rem",
           }}
         >

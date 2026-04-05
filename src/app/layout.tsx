@@ -9,38 +9,40 @@ import { PageTransitions } from "@/components/layout/PageTransitions";
 
 export const metadata: Metadata = {
   title: {
-    default: "Muhammad Abdullah Sarwar — Full Stack Engineer & AI Specialist",
+    default: "Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer",
     template: "%s | Muhammad Abdullah Sarwar",
   },
   description:
-    "Portfolio of Muhammad Abdullah Sarwar — Lead Full Stack Developer at Medquad Health Solutions. Expert in React, Next.js, Node.js, and AI integration (OpenAI). Based in Islamabad, Pakistan.",
+    "Portfolio of Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer. Sole developer at Medquad Health Solutions, building production health-tech for hospitals across Pakistan. MERN stack, Flutter, AWS, OpenAI.",
   keywords: [
     "Muhammad Abdullah Sarwar",
     "Full Stack Developer",
-    "AI Integration Specialist",
+    "AI Integration Engineer",
+    "MERN Stack",
     "React Developer",
     "Next.js",
     "Node.js",
+    "Flutter",
     "Islamabad",
     "Pakistan",
-    "Medquad",
+    "Medquad Health Solutions",
   ],
   authors: [{ name: "Muhammad Abdullah Sarwar" }],
   creator: "Muhammad Abdullah Sarwar",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://abdullahsarwar.dev",
-    title: "Muhammad Abdullah Sarwar — Full Stack Engineer & AI Specialist",
+    url: "https://m-abdullah-sarwar.vercel.app/",
+    title: "Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer",
     description:
-      "Building scalable products where great engineering meets intelligent AI. View projects, skills, and experience.",
+      "Sole developer at Medquad Health Solutions — shipping production health-tech for hospitals across Pakistan. View projects, skills, and experience.",
     siteName: "Muhammad Abdullah Sarwar Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhammad Abdullah Sarwar — Full Stack Engineer & AI Specialist",
+    title: "Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer",
     description:
-      "Building scalable products where great engineering meets intelligent AI.",
+      "Sole developer at Medquad Health Solutions — shipping production health-tech for hospitals across Pakistan.",
   },
   robots: {
     index: true,
@@ -53,13 +55,14 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://abdullahsarwar.dev/#person",
+      "@id": "https://m-abdullah-sarwar.vercel.app/#person",
       "name": "Muhammad Abdullah Sarwar",
-      "jobTitle": "Full Stack Engineer & AI Integration Specialist",
-      "url": "https://abdullahsarwar.dev",
+      "jobTitle": "Full Stack Developer & AI Integration Engineer",
+      "url": "https://m-abdullah-sarwar.vercel.app/",
+      "email": "mabdullahsarwar3731@gmail.com",
       "sameAs": [
-        "https://github.com/yourusername",
-        "https://linkedin.com/in/yourusername",
+        "https://github.com/MAbdullahSarwar31",
+        "https://www.linkedin.com/in/muhammad-abdullah-sarwar-b727682a8/",
       ],
       "worksFor": {
         "@type": "Organization",
@@ -72,11 +75,11 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://abdullahsarwar.dev/#website",
-      "url": "https://abdullahsarwar.dev",
+      "@id": "https://m-abdullah-sarwar.vercel.app/#website",
+      "url": "https://m-abdullah-sarwar.vercel.app/",
       "name": "Muhammad Abdullah Sarwar Portfolio",
       "description":
-        "Portfolio of Muhammad Abdullah Sarwar — Full Stack Engineer & AI Integration Specialist",
+        "Portfolio of Muhammad Abdullah Sarwar — Full Stack Developer & AI Integration Engineer",
     },
   ],
 };

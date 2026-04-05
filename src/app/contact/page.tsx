@@ -16,7 +16,7 @@ const socialLinks = [
   },
   {
     label: "GitHub",
-    value: "@yourusername",
+    value: "@MAbdullahSarwar31",
     href:  siteConfig.github,
     icon:  GitBranch,
     color: "#94a3b8",
@@ -31,6 +31,13 @@ const socialLinks = [
 ];
 
 type Status = "idle" | "loading";
+
+const toastBase: React.CSSProperties = {
+  background: "var(--bg-card)",
+  color:      "var(--text-primary)",
+  borderRadius: "12px",
+  fontSize:   "0.875rem",
+};
 
 export default function ContactPage() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -48,30 +55,33 @@ export default function ContactPage() {
     setStatus("loading");
 
     try {
-      // Replace with your actual API call / EmailJS / Resend
-      await new Promise((r) => setTimeout(r, 1500));
-      toast.success("Message sent! I\u2019ll get back to you within 24 hours.", {
-        duration: 5000,
-        style: {
-          background: "var(--bg-card)",
-          color: "var(--text-primary)",
-          border: "1px solid rgba(16,185,129,0.3)",
-          borderRadius: "12px",
-          fontSize: "0.875rem",
-        },
-        iconTheme: { primary: "#10b981", secondary: "white" },
+      const res  = await fetch("/api/contact", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(form),
       });
+      const data: { success?: boolean; demo?: boolean; error?: string } = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+
+      toast.success(
+        data.demo
+          ? "Demo mode — message not delivered. Add WEB3FORMS_ACCESS_KEY to enable email."
+          : "Message sent! I'll get back to you within 24 hours.",
+        {
+          duration: 6000,
+          style: { ...toastBase, border: "1px solid rgba(16,185,129,0.3)" },
+          iconTheme: { primary: "#10b981", secondary: "white" },
+        }
+      );
       setForm({ name: "", email: "", subject: "", message: "" });
-    } catch {
-      toast.error("Something went wrong. Please try again.", {
-        duration: 4000,
-        style: {
-          background: "var(--bg-card)",
-          color: "var(--text-primary)",
-          border: "1px solid rgba(239,68,68,0.3)",
-          borderRadius: "12px",
-          fontSize: "0.875rem",
-        },
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      toast.error(msg, {
+        duration: 5000,
+        style: { ...toastBase, border: "1px solid rgba(239,68,68,0.3)" },
       });
     } finally {
       setStatus("idle");
@@ -81,6 +91,7 @@ export default function ContactPage() {
   const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "0.75rem 1rem",
+    minHeight: "48px",
     borderRadius: "10px",
     border: "1.5px solid var(--border-default)",
     background: "var(--bg-tertiary)",
@@ -97,6 +108,7 @@ export default function ContactPage() {
 
       {/* Header */}
       <div
+        className="contact-header"
         style={{
           background: "var(--bg-secondary)",
           borderBottom: "1px solid var(--border-default)",
@@ -144,6 +156,7 @@ export default function ContactPage() {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <div
+              className="contact-form-card"
               style={{
                 padding: "2.5rem",
                 border: "1px solid var(--border-default)",
@@ -252,7 +265,8 @@ export default function ContactPage() {
                   className="btn-accent"
                   style={{
                     justifyContent: "center", padding: "0.85rem",
-                    fontSize: "0.95rem", opacity: status === "loading" ? 0.7 : 1,
+                    fontSize: "0.95rem", minHeight: "48px",
+                    opacity: status === "loading" ? 0.7 : 1,
                   }}
                 >
                   {status === "loading" ? "Sending..." : <><Send size={16} /> Send Message</>}
@@ -362,8 +376,12 @@ export default function ContactPage() {
           box-shadow: var(--shadow-md) !important;
         }
         @media (max-width: 768px) {
-          .contact-grid { grid-template-columns: 1fr !important; }
+          .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .form-cols    { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .contact-form-card { padding: 1.5rem !important; }
+          .contact-header    { padding: 2.5rem 0 2rem !important; }
         }
       `}</style>
     </div>

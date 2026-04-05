@@ -636,3 +636,100 @@ body {
   gap: 2px;
   color: #f59e0b;
 }
+
+/* ── Responsive Layout ─────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .section { padding: 4rem 0; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section { padding: 3.5rem 0; }
+
+  .section-subtitle {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  /* Reduce blur radius for perf on lower-end devices */
+  .mesh-blob { filter: blur(40px); }
+
+  /* Cards: tighter padding on mobile */
+  .process-card,
+  .testimonial-card { padding: 1.5rem; }
+  .experience-card { padding: 1.25rem; }
+
+  /* Modal → slide-up bottom sheet */
+  .modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .modal-panel {
+    border-radius: 24px 24px 0 0;
+    max-height: 90vh;
+    max-width: 100%;
+  }
+
+  /* CTA inner box */
+  .cta-inner { padding: 2.5rem 1.5rem !important; }
+
+  /* Footer bottom bar: stack on mobile */
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .section { padding: 2.75rem 0; }
+  .container { padding: 0 1rem; }
+
+  .process-card,
+  .testimonial-card { padding: 1.125rem; }
+
+  /* Hero photo: square crop on tiny screens */
+  .hero-photo-frame { aspect-ratio: 1 / 1 !important; }
+
+  /* Hero CTA: full-width stack on very small screens */
+  .hero-cta-group { flex-direction: column; align-items: stretch !important; }
+  .hero-cta-btn   { justify-content: center; width: 100%; }
+
+  /* Slightly smaller buttons on small phones */
+  .btn-accent,
+  .btn-ghost {
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+  }
+}
+
+/* ── Hero CTA group: left-align on desktop ──────────────────── */
+@media (min-width: 1024px) {
+  .hero-cta-group { justify-content: flex-start !important; }
+}
+
+/* ── Ensure minimum touch targets everywhere ────────────────── */
+button, a, [role="button"] { min-height: 44px; }
+/* Exception: inline badges/tags that shouldn't be taller */
+.tech-badge, .section-label { min-height: unset; }
+
+/* ── Prevent any stray horizontal overflow ──────────────────── */
+html, body { overflow-x: hidden; max-width: 100vw; }
+
+/* ── Smooth focus rings ─────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Consistent card hover lift ────────────────────────────── */
+.experience-card:hover,
+.process-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-3px);
+}

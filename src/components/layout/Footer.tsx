@@ -171,6 +171,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div
+          className="footer-bottom"
           style={{
             borderTop: "1px solid var(--border-default)",
             paddingTop: "1.25rem",

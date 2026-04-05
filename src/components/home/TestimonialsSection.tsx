@@ -13,7 +13,7 @@ const testimonials = [
     color: "#3b82f6",
     stars: 5,
     quote:
-      "Abdullah transformed how our entire team operates. The internal portal he built is used daily by everyone, and the WhatsApp integration alone saved us hours every week. The AI chatbot he&apos;s architecting is going to be a genuine game-changer for our customer support pipeline.",
+      "Abdullah transformed how our entire team operates. The internal portal he built is used daily by everyone, and the WhatsApp integration alone saved us hours every week. The AI chatbot he&#39;s architecting is going to be a genuine game-changer for our customer support pipeline.",
   },
   {
     initials: "FI",
@@ -78,7 +78,7 @@ export function TestimonialsSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
             gap: "1.5rem",
           }}
         >

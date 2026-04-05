@@ -23,6 +23,7 @@ export function CTASection() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
+          className="cta-inner"
           style={{
             maxWidth: "640px",
             margin: "0 auto",
@@ -81,6 +82,11 @@ export function CTASection() {
           </div>
         </motion.div>
       </div>
+      <style jsx>{`
+        @media (max-width: 480px) {
+          .cta-inner { padding: 2rem 1.25rem !important; border-radius: 20px !important; }
+        }
+      `}</style>
     </section>
   );
 }

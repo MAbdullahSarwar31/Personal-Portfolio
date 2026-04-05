@@ -8,10 +8,10 @@ import { ArrowRight, Bot, Download, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 
 const ROLES = [
-  "Full Stack Engineer",
-  "AI Integration Specialist",
-  "React & Next.js Developer",
-  "Problem Solver",
+  "Full Stack Developer",
+  "AI Integration Engineer",
+  "MERN Stack Specialist",
+  "Flutter & Mobile Developer",
 ];
 
 const floatingBadges = [
@@ -190,7 +190,7 @@ export function HeroSection() {
 
       {/* Main Content */}
       <div className="container" style={{ position: "relative", zIndex: 3, paddingTop: "2rem", paddingBottom: "4rem" }}>
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-16">
 
           {/* Left: Profile Photo with parallax */}
           <motion.div
@@ -198,9 +198,10 @@ export function HeroSection() {
             initial={{ opacity: 0, x: -40, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, type: "spring", damping: 20 }}
-            className="w-full lg:w-5/12 max-w-[420px] mx-auto lg:mx-0 order-first"
+            className="w-full lg:w-5/12 max-w-[300px] sm:max-w-[380px] lg:max-w-[420px] mx-auto lg:mx-0 order-last lg:order-first"
           >
             <div
+              className="hero-photo-frame"
               style={{
                 position: "relative",
                 width: "100%",
@@ -336,12 +337,12 @@ export function HeroSection() {
                 marginBottom: "2.5rem",
               }}
             >
-              Building scalable products where great engineering meets intelligent AI.
-              Currently leading development at{" "}
+              Sole developer at{" "}
               <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>
                 Medquad Health Solutions
-              </span>
-              .
+              </span>{" "}
+              — shipping production health-tech for hospitals across Pakistan. MERN stack,
+              real-time systems, cloud infrastructure, and AI that runs in the real world.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -349,14 +350,21 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4"
+              className="hero-cta-group"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.75rem",
+              }}
             >
-              <Link href="/projects" className="btn-accent">
+              <Link href="/projects" className="btn-accent hero-cta-btn">
                 View My Work <ArrowRight size={16} />
               </Link>
               <button
                 onClick={() => document.getElementById("chat-widget-btn")?.click()}
-                className="btn-ghost"
+                className="btn-ghost hero-cta-btn"
               >
                 <Bot size={16} /> Chat with my AI
               </button>
@@ -365,7 +373,7 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost"
-                style={{ padding: "0.6rem 1rem" }}
+                style={{ padding: "0.6rem 1rem", minHeight: "44px", display: "inline-flex", alignItems: "center" }}
                 aria-label="Download Resume"
               >
                 <Download size={16} />
