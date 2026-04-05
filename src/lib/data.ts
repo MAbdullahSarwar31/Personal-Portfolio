@@ -1,7 +1,7 @@
 /* ── Site Config ───────────────────────────────────────────── */
 export const siteConfig = {
   name:           "Muhammad Abdullah Sarwar",
-  shortName:      "Abdullah Sarwar",
+  shortName:      "Muhammad Abdullah Sarwar",
   role:           "Full Stack Developer | AI Integration Engineer",
   tagline:        "Sole developer at Medquad Health Solutions — shipping production health-tech for hospitals across Pakistan.",
   location:       "Islamabad, Pakistan",

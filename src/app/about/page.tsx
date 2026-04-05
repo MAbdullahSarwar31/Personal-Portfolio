@@ -301,8 +301,8 @@ export default function AboutPage() {
                 systems, NLP-based ticket routing, cloud infrastructure on AWS, and AI integration
                 via OpenAI. Beyond Medquad, I&apos;ve completed AI &amp; ML internships at
                 CodeAlpha and DevelopersHub, and I&apos;m currently pursuing my BS in Software
-                Engineering at Bahria University (expected June 2027), where my Final Year Project
-                ranked 2nd out of 50.
+                Engineering at Bahria University (expected June 2027), where my FYP Management
+                System App — a Business Process Automation course project — ranked 2nd out of 50.
               </p>
 
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
