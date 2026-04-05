@@ -42,55 +42,11 @@ function getDuration(period: string, current: boolean): string {
   return `${years} yr ${months} mo`;
 }
 
-/* ── Skill Bar ────────────────────────────────────────────── */
-function SkillBar({
-  name,
-  level,
-  color,
-  index,
-}: {
-  name: string;
-  level: number;
-  color: string;
-  index: number;
-}) {
-  const ref    = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <div ref={ref} style={{ marginBottom: "0.75rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.35rem" }}>
-        <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--text-primary)" }}>
-          {name}
-        </span>
-        <span
-          style={{
-            fontSize: "0.78rem",
-            color: "var(--text-muted)",
-            fontFamily: "JetBrains Mono, monospace",
-          }}
-        >
-          {level}%
-        </span>
-      </div>
-      <div className="skill-bar">
-        <motion.div
-          className="skill-bar-fill"
-          initial={{ scaleX: 0 }}
-          animate={inView ? { scaleX: level / 100 } : {}}
-          transition={{ delay: index * 0.05, duration: 0.8 }}
-          style={{ background: `linear-gradient(90deg, ${color}, ${color}99)` }}
-        />
-      </div>
-    </div>
-  );
-}
-
 /* ── Experience Glass Card ────────────────────────────────── */
 function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const duration = getDuration(exp.period, exp.current);
+  const duration = exp.durationOverride ?? getDuration(exp.period, exp.current);
 
   return (
     <motion.div
@@ -344,8 +300,9 @@ export default function AboutPage() {
                 that hospitals across Pakistan run on daily. The work spans real-time WebSocket
                 systems, NLP-based ticket routing, cloud infrastructure on AWS, and AI integration
                 via OpenAI. Beyond Medquad, I&apos;ve completed AI &amp; ML internships at
-                CodeAlpha and DevelopersHub, and I recently graduated with a BS in Software
-                Engineering from Bahria University, where my Final Year Project ranked 2nd out of 50.
+                CodeAlpha and DevelopersHub, and I&apos;m currently pursuing my BS in Software
+                Engineering at Bahria University (expected June 2027), where my Final Year Project
+                ranked 2nd out of 50.
               </p>
 
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
@@ -450,7 +407,7 @@ export default function AboutPage() {
                     letterSpacing: "0.08em", color: "#7c3aed", marginBottom: "0.4rem",
                   }}
                 >
-                  2021 — 2025
+                  Sep 2023 — Present
                 </p>
                 <h3
                   style={{
@@ -463,10 +420,13 @@ export default function AboutPage() {
                 <p
                   style={{
                     fontSize: "0.875rem", color: "var(--accent-primary)",
-                    fontWeight: 600, marginBottom: "0.75rem",
+                    fontWeight: 600, marginBottom: "0.5rem",
                   }}
                 >
                   Bahria University, Islamabad
+                </p>
+                <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
+                  Currently pursuing · Expected June 2027
                 </p>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                   <Award size={14} style={{ color: "#f59e0b" }} />
@@ -495,7 +455,7 @@ export default function AboutPage() {
                 <Code2 size={18} color="white" />
               </div>
               <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text-primary)" }}>
-                Skills &amp; Proficiency
+                Technical Skills
               </h2>
             </div>
 
@@ -503,29 +463,39 @@ export default function AboutPage() {
               const catSkills = skills.filter((s) => s.category === cat.key);
               if (catSkills.length === 0) return null;
               return (
-                <div key={cat.key} style={{ marginBottom: "2rem" }}>
+                <div key={cat.key} style={{ marginBottom: "1.75rem" }}>
                   <h3
                     style={{
-                      fontSize: "0.78rem", fontWeight: 600,
+                      fontSize: "0.72rem", fontWeight: 700,
                       textTransform: "uppercase", letterSpacing: "0.1em",
-                      color: cat.color, marginBottom: "1rem",
+                      color: cat.color, marginBottom: "0.75rem",
                       display: "flex", alignItems: "center", gap: "0.5rem",
                     }}
                   >
                     <div
-                      style={{ width: "8px", height: "8px", borderRadius: "2px", background: cat.color }}
+                      style={{ width: "7px", height: "7px", borderRadius: "2px", background: cat.color }}
                     />
                     {cat.label}
                   </h3>
-                  {catSkills.map((skill, i) => (
-                    <SkillBar
-                      key={skill.name}
-                      name={skill.name}
-                      level={skill.level}
-                      color={cat.color}
-                      index={i}
-                    />
-                  ))}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                    {catSkills.map((skill) => (
+                      <span
+                        key={skill.name}
+                        style={{
+                          fontSize: "0.78rem",
+                          padding: "0.25rem 0.7rem",
+                          borderRadius: "999px",
+                          background: `${cat.color}14`,
+                          color: cat.color,
+                          border: `1px solid ${cat.color}30`,
+                          fontWeight: 500,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {skill.name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               );
             })}

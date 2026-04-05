@@ -16,10 +16,10 @@ export const siteConfig = {
 
 /* ── Stats ─────────────────────────────────────────────────── */
 export const stats = [
-  { label: "Years Experience",  value: "2+",  suffix: "" },
-  { label: "Students Impacted", value: "200", suffix: "+" },
-  { label: "Hospitals Served",  value: "20",  suffix: "+" },
-  { label: "Top Project Rank",  value: "#2",  suffix: "/50" },
+  { label: "Years Experience",  value: "2",   suffix: "+" },
+  { label: "Students Impacted", value: "100", suffix: "+" },
+  { label: "Hospital Clients",  value: "25",  suffix: "+" },
+  { label: "Top Project Rank",  value: "#2",  suffix: "" },
 ];
 
 /* ── Projects ──────────────────────────────────────────────── */
@@ -46,26 +46,26 @@ export const projects: Project[] = [
   {
     id: "medquad-portal",
     title: "Medquad Health Solutions Portal",
-    subtitle: "Production MERN Stack Operations System — 20+ Hospitals",
+    subtitle: "Production MERN Stack Operations System — 25+ Hospital Clients",
     description:
-      "Full-stack multi-role operations portal serving hospitals across Pakistan — built solo, end-to-end, running in production.",
+      "Full-stack multi-role operations portal serving 25+ hospital clients across Pakistan — built solo, end-to-end, running in production.",
     longDescription:
-      "As the sole developer at Medquad Health Solutions, I designed, architected, and shipped the complete operations portal used daily across 20+ hospitals in Pakistan. The system handles four user roles (Admin, Doctor, Nurse, Receptionist), real-time patient queue management via WebSockets, an NLP-powered ticket routing engine, predictive equipment maintenance via Prophet time-series forecasting, and WhatsApp Business API automation. Deployed on AWS ECS Fargate with a full CI/CD pipeline.",
+      "As the sole developer at Medquad Health Solutions, I designed, architected, and shipped the complete operations portal used daily across 25+ hospital clients in Pakistan. The system handles three user roles (Admin, Technician, Client), a real-time service ticket management system using Socket.io WebSockets — eliminating approximately 80% of manual status-check calls — an NLP-powered ticket routing engine, predictive equipment maintenance via Prophet time-series forecasting, and WhatsApp Business API automation. Deployed on AWS ECS Fargate with a full CI/CD pipeline.",
     image: "/projects/medquad-portal.png",
     tags: [
       "MongoDB", "Express.js", "React", "Node.js",
-      "WebSocket", "OpenAI API", "WhatsApp Business API",
+      "Socket.io", "OpenAI API", "WhatsApp Business API",
       "AWS ECS Fargate", "Docker", "GitHub Actions", "Prophet",
     ],
     category: "professional",
     projectTag: "Professional · Production",
     metrics: [
-      "Live in production across 20+ hospitals in Pakistan",
-      "Multi-role system: Admin, Doctor, Nurse, Receptionist",
-      "Real-time WebSocket communication for live patient queue data",
+      "Live in production across 25+ hospital clients in Pakistan",
+      "Multi-role system: Admin, Technician, Client",
+      "Real-time service ticket system via Socket.io — eliminated ~80% of manual status-check calls",
       "NLP-based ticket routing — auto-classifies & assigns support requests",
-      "WhatsApp Business API for automated appointment reminders",
-      "Prophet time-series forecasting for predictive maintenance",
+      "WhatsApp Business API for automated client notifications and broadcast messaging",
+      "Prophet time-series forecasting for predictive equipment maintenance",
       "AWS ECS Fargate deployment with CloudFront CDN & GitHub Actions CI/CD",
     ],
     liveUrl: "https://medquadhealth.com",
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     title: "FYP Management System",
     subtitle: "Flutter Mobile App — Ranked 2nd / 50 Projects",
     description:
-      "Cross-platform Flutter mobile app automating the complete Final Year Project lifecycle for 200+ students and 10 faculty at Bahria University.",
+      "Cross-platform Flutter mobile app automating the complete Final Year Project lifecycle for 100+ students and 12 faculty at Bahria University.",
     longDescription:
       "Sole developer of a Flutter cross-platform mobile app that fully digitized the manual FYP management process at Bahria University Islamabad. The app covers project submissions, supervisor assignments, milestone tracking, evaluation scheduling, and grading — eliminating an entirely paper-based workflow. Ranked 2nd out of 50 competing projects at the university showcase, evaluated by a panel of industry professionals and academic faculty.",
     image: "/projects/fyp-app.png",
@@ -87,7 +87,7 @@ export const projects: Project[] = [
     category: "mobile",
     projectTag: "Academic · Mobile App",
     metrics: [
-      "200+ students and 10 faculty members served",
+      "100+ students and 12 faculty members served",
       "Automated supervisor assignment, milestone tracking & grading workflows",
       "Firebase Realtime Database for live notifications and status updates",
       "Ranked 2nd out of 50 projects at Bahria University showcase",
@@ -126,17 +126,17 @@ export const projects: Project[] = [
     title: "WonderLand Toy Store",
     subtitle: "MERN Stack E-Commerce — 4-Member Team",
     description:
-      "Full-stack MERN e-commerce platform for a toy store — product catalog, shopping cart, JWT authentication, and order management.",
+      "Full-featured MERN e-commerce platform with real-time product browsing, AI-powered product suggestions, and a complete admin panel.",
     longDescription:
-      "Built as part of a 4-member academic team using the MERN stack. The platform includes a fully featured product catalog with search and filtering, shopping cart with persistent state, user authentication with JWT, and an admin dashboard for order and inventory management. I led the backend API design and database schema.",
+      "Co-developed a full-featured e-commerce web application as part of a 4-member academic team using the MERN stack. The platform features real-time product browsing, a dynamic shopping cart, secure payment integration, and AI-powered product suggestions. Implemented smooth scrolling UX, category filtering, and a responsive storefront optimized for all device sizes. Built a complete admin panel for product and order management with role-based access.",
     image: "/projects/wonderland.png",
-    tags: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "REST API"],
+    tags: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
     category: "fullstack",
     projectTag: "Academic · Team Project",
     metrics: [
-      "Full MERN stack e-commerce with product catalog, cart, and checkout",
-      "JWT authentication with role-based admin dashboard",
-      "RESTful API with real-time inventory management",
+      "Real-time product browsing, dynamic shopping cart, and secure payment integration",
+      "AI-powered product suggestions and category filtering",
+      "Complete admin panel for product and order management with role-based access",
     ],
     featured: false,
     status: "completed",
@@ -212,7 +212,6 @@ export const featuredProjects = projects.filter((p) => p.featured);
 /* ── Skills ────────────────────────────────────────────────── */
 export interface Skill {
   name: string;
-  level: number; // 0–100
   category:
     | "frontend"
     | "backend"
@@ -226,45 +225,50 @@ export interface Skill {
 
 export const skills: Skill[] = [
   // Frontend
-  { name: "React 18",       level: 92, category: "frontend" },
-  { name: "Next.js",        level: 90, category: "frontend" },
-  { name: "Tailwind CSS",   level: 92, category: "frontend" },
-  { name: "HTML5 / CSS3",   level: 95, category: "frontend" },
-  { name: "Bootstrap",      level: 82, category: "frontend" },
+  { name: "React 18",     category: "frontend" },
+  { name: "Next.js",      category: "frontend" },
+  { name: "HTML5",        category: "frontend" },
+  { name: "CSS3",         category: "frontend" },
+  { name: "Tailwind CSS", category: "frontend" },
+  { name: "Bootstrap",    category: "frontend" },
   // Backend
-  { name: "Node.js",        level: 88, category: "backend" },
-  { name: "Express.js",     level: 88, category: "backend" },
-  { name: "Django",         level: 72, category: "backend" },
-  { name: "RESTful APIs",   level: 90, category: "backend" },
+  { name: "Node.js",      category: "backend" },
+  { name: "Express.js",   category: "backend" },
+  { name: "Django",       category: "backend" },
+  { name: "RESTful APIs", category: "backend" },
   // Mobile
-  { name: "Flutter",        level: 82, category: "mobile" },
-  { name: "Dart",           level: 80, category: "mobile" },
-  { name: "Firebase",       level: 82, category: "mobile" },
+  { name: "Flutter",   category: "mobile" },
+  { name: "Dart",      category: "mobile" },
+  { name: "Firebase",  category: "mobile" },
   // Databases
-  { name: "MongoDB Atlas",         level: 85, category: "database" },
-  { name: "MySQL",                 level: 80, category: "database" },
-  { name: "Firebase Realtime DB",  level: 78, category: "database" },
+  { name: "MongoDB Atlas",        category: "database" },
+  { name: "MySQL",                category: "database" },
+  { name: "Firebase Realtime DB", category: "database" },
   // AI & Automation
-  { name: "OpenAI API",            level: 85, category: "ai" },
-  { name: "Google Gemini API",     level: 78, category: "ai" },
-  { name: "WhatsApp Business API", level: 82, category: "ai" },
-  { name: "Hugging Face",          level: 72, category: "ai" },
-  { name: "Prophet Forecasting",   level: 70, category: "ai" },
+  { name: "OpenAI API",            category: "ai" },
+  { name: "Google Gemini API",     category: "ai" },
+  { name: "WhatsApp Business API", category: "ai" },
+  { name: "Hugging Face",          category: "ai" },
+  { name: "Prophet Forecasting",   category: "ai" },
   // DevOps & Cloud
-  { name: "AWS (ECS Fargate / S3 / CloudFront)", level: 72, category: "devops" },
-  { name: "Docker",          level: 72, category: "devops" },
-  { name: "GitHub Actions",  level: 78, category: "devops" },
-  { name: "Vercel",          level: 90, category: "devops" },
+  { name: "AWS (ECS Fargate, S3, CloudFront)", category: "devops" },
+  { name: "Docker",         category: "devops" },
+  { name: "GitHub Actions", category: "devops" },
+  { name: "CI/CD",          category: "devops" },
+  { name: "Vercel",         category: "devops" },
   // Languages
-  { name: "JavaScript",  level: 90, category: "languages" },
-  { name: "Python",      level: 82, category: "languages" },
-  { name: "C++",         level: 75, category: "languages" },
-  { name: "Java",        level: 70, category: "languages" },
+  { name: "JavaScript", category: "languages" },
+  { name: "Python",     category: "languages" },
+  { name: "C++",        category: "languages" },
+  { name: "Java",       category: "languages" },
+  { name: "Dart",       category: "languages" },
   // Tools
-  { name: "Git / GitHub",  level: 90, category: "tools" },
-  { name: "Postman",       level: 85, category: "tools" },
-  { name: "Figma",         level: 72, category: "tools" },
-  { name: "Arduino IDE",   level: 68, category: "tools" },
+  { name: "Git",        category: "tools" },
+  { name: "GitHub",     category: "tools" },
+  { name: "Postman",    category: "tools" },
+  { name: "VS Code",    category: "tools" },
+  { name: "Arduino IDE",category: "tools" },
+  { name: "Figma",      category: "tools" },
 ];
 
 export const skillCategories: { key: Skill["category"]; label: string; color: string }[] = [
@@ -299,6 +303,8 @@ export interface Experience {
   description: string;
   achievements: string[];
   tags: string[];
+  /** Override the auto-calculated duration badge e.g. "3 mo" */
+  durationOverride?: string;
 }
 
 export const experience: Experience[] = [
@@ -310,34 +316,33 @@ export const experience: Experience[] = [
     current: true,
     location: "Islamabad, Pakistan",
     description:
-      "Sole developer responsible for all engineering at Medquad — a biomedical health-tech company. I architect, build, and maintain the production operations portal serving hospitals across Pakistan.",
+      "Sole developer responsible for all engineering at Medquad — a biomedical health-tech company. I architect, build, and maintain the production operations portal serving 25+ hospital clients across Pakistan.",
     achievements: [
-      "Architected and shipped a MERN stack multi-role operations portal (Admin, Doctor, Nurse, Receptionist) running across 20+ hospitals in Pakistan",
-      "Implemented real-time WebSocket communication for live patient queue updates and staff coordination",
-      "Built an NLP-based ticket routing system that automatically classifies and assigns support requests to the correct department",
-      "Integrated WhatsApp Business API for automated patient appointment reminders and broadcast messaging",
+      "Architected and shipped a MERN stack multi-role operations portal (Admin, Technician, Client) running across 25+ hospital clients in Pakistan",
+      "Built a real-time service ticket management system using Socket.io WebSockets, enabling instant status updates and eliminating approximately 80% of manual status-check calls from hospital clients",
+      "Developed an NLP-based ticket routing system that automatically classifies and assigns support requests to the correct department",
+      "Integrated WhatsApp Business API for automated client notifications and broadcast messaging",
       "Developed a predictive maintenance module using Facebook Prophet time-series forecasting to detect equipment anomalies before failure",
       "Deployed on AWS ECS Fargate with S3 static assets, CloudFront CDN, and GitHub Actions CI/CD pipeline",
       "Building an OpenAI-powered AI chatbot for automated customer support across WhatsApp and web channels",
     ],
-    tags: ["MERN Stack", "WebSocket", "OpenAI API", "WhatsApp API", "AWS ECS", "Prophet", "Docker"],
+    tags: ["MERN Stack", "Socket.io", "OpenAI API", "WhatsApp API", "AWS ECS", "Prophet", "Docker"],
   },
   {
     id: "codealpha",
     company: "CodeAlpha",
     role: "AI & Machine Learning Intern",
-    period: "Mar 2025 — May 2025",
-    current: false,
+    period: "March 2026 — Present",
+    current: true,
     location: "Remote",
     description:
-      "Completed a remote AI & ML internship delivering real-world machine learning and NLP projects using Python and the Hugging Face ecosystem.",
+      "Executing real-world AI and ML projects in a remote production environment across two concurrent internship tracks.",
     achievements: [
-      "Developed supervised and unsupervised ML models for classification and regression tasks using scikit-learn",
-      "Built end-to-end NLP pipelines using Hugging Face Transformers for text classification and sentiment analysis",
-      "Worked with Python's data science stack — pandas, NumPy, scikit-learn, and matplotlib for data analysis and visualization",
-      "Delivered 3+ AI project submissions across NLP, computer vision, and time-series forecasting domains",
+      "Developing an intelligent FAQ Chatbot capable of understanding and responding to natural language user queries using NLP techniques",
+      "Building a Language Translation Tool leveraging transformer-based models for accurate cross-language text conversion",
+      "Implementing an Emotion Recognition from Speech system using audio feature extraction and machine learning classification algorithms",
     ],
-    tags: ["Python", "scikit-learn", "Hugging Face", "NLP", "pandas", "NumPy"],
+    tags: ["Python", "NLP", "Hugging Face", "OpenAI", "Machine Learning"],
   },
   {
     id: "developershub",
@@ -352,5 +357,6 @@ export const experience: Experience[] = [
       "Built and deployed cross-platform mobile applications using Flutter and Dart with Firebase backend integration",
     ],
     tags: ["Flutter", "Dart", "Firebase", "Mobile Development"],
+    durationOverride: "3 mo",
   },
 ];

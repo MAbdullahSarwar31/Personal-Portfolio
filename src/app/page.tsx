@@ -2,7 +2,8 @@ import { HeroSection }        from "@/components/home/HeroSection";
 import { StatsSection }       from "@/components/home/StatsSection";
 import { ProcessSection }     from "@/components/home/ProcessSection";
 import { FeaturedProjects }   from "@/components/home/FeaturedProjects";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+// TODO: Uncomment TestimonialsSection once testimonials are verified with real people
+// import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { TechMarquee }        from "@/components/home/TechMarquee";
 import { CTASection }         from "@/components/home/CTASection";
 
@@ -21,7 +22,7 @@ export default function HomePage() {
       <StatsSection />
       <ProcessSection />
       <FeaturedProjects />
-      <TestimonialsSection />
+      {/* TODO: <TestimonialsSection /> — commented out until testimonials are verified */}
       <TechMarquee />
       <CTASection />
     </>
