@@ -284,7 +284,7 @@ export default function AboutPage() {
                 I&apos;m a Full Stack Developer and AI Integration Engineer with 2+ years of
                 hands-on experience shipping production software. I&apos;m the sole developer at{" "}
                 <a
-                  href="https://medquadhealth.com"
+                  href="https://medquad-health-client.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
