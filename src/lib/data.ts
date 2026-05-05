@@ -68,7 +68,7 @@ export const projects: Project[] = [
       "Prophet time-series forecasting for predictive equipment maintenance",
       "AWS ECS Fargate deployment with CloudFront CDN & GitHub Actions CI/CD",
     ],
-    liveUrl: "https://medquad-health-client.vercel.app/",
+    liveUrl: "https://www.medquadhealth.com/",
     featured: true,
     status: "live",
   },
